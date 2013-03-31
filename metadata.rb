@@ -17,6 +17,7 @@ end
 end
 
 depends 'ohai', '>= 1.1.4'
+depends "git"
 
 %w{ bluepill }.each do |cb|
   recommends cb
