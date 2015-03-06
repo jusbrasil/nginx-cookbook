@@ -25,21 +25,21 @@ remote_file "#{module_path}.zip" do
 end
 
 bash "unzip ngx_pagespeed" do
-	code %(unzip -uo #{module_path}.zip)
-	cwd nginx_path
-	user "root"
-	group "root"
+  code %(unzip -uo #{module_path}.zip)
+  cwd nginx_path
+  user "root"
+  group "root"
 end
 
 remote_file "/tmp/psol-#{npm_version}.tar.gz" do
-	source "https://dl.google.com/dl/page-speed/psol/#{npm_version}.tar.gz"
+  source "https://dl.google.com/dl/page-speed/psol/#{npm_version}.tar.gz"
 end
 
 bash "unzip psol" do
-	code %(tar -xzvf /tmp/psol-#{npm_version}.tar.gz)
-	cwd module_path
-	user "root"
-	group "root"
+code %(tar -xzvf /tmp/psol-#{npm_version}.tar.gz)
+  cwd module_path
+  user "root"
+  group "root"
 end
 
 node.run_state['nginx_configure_flags'] =
