@@ -21,7 +21,7 @@ nginx_path = "#{Chef::Config['file_cache_path'] || '/tmp'}"
 module_path = "#{nginx_path}/ngx_pagespeed-release-#{npm_version}-beta"
 
 remote_file "#{module_path}.zip" do
-	source "https://github.com/pagespeed/ngx_pagespeed/archive/release-#{npm_version}-beta.zip"
+  source "https://github.com/pagespeed/ngx_pagespeed/archive/release-#{npm_version}-beta.zip"
 end
 
 bash "unzip ngx_pagespeed" do
