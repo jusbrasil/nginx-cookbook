@@ -15,31 +15,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NPS_VERSION="1.9.32.3"
+npm_version = node['nginx']['pagespeed']['nps_version']
 
 nginx_path = "#{Chef::Config['file_cache_path'] || '/tmp'}"
-module_path = "#{nginx_path}/ngx_pagespeed-release-#{NPS_VERSION}-beta"
+module_path = "#{nginx_path}/ngx_pagespeed-release-#{npm_version}-beta"
 
 remote_file "#{module_path}.zip" do
-	source "https://github.com/pagespeed/ngx_pagespeed/archive/release-#{NPS_VERSION}-beta.zip"
+	source "https://github.com/pagespeed/ngx_pagespeed/archive/release-#{npm_version}-beta.zip"
 end
 
 bash "unzip ngx_pagespeed" do
-		code %(unzip -uo #{module_path}.zip)
-		cwd nginx_path
-		user "root"
-		group "root"
+	code %(unzip -uo #{module_path}.zip)
+	cwd nginx_path
+	user "root"
+	group "root"
 end
 
-remote_file "/tmp/psol-#{NPS_VERSION}.tar.gz" do
-	source "https://dl.google.com/dl/page-speed/psol/#{NPS_VERSION}.tar.gz"
+remote_file "/tmp/psol-#{npm_version}.tar.gz" do
+	source "https://dl.google.com/dl/page-speed/psol/#{npm_version}.tar.gz"
 end
 
 bash "unzip psol" do
-		code %(tar -xzvf /tmp/psol-#{NPS_VERSION}.tar.gz)
-		cwd module_path
-		user "root"
-		group "root"
+	code %(tar -xzvf /tmp/psol-#{npm_version}.tar.gz)
+	cwd module_path
+	user "root"
+	group "root"
 end
 
 node.run_state['nginx_configure_flags'] =
